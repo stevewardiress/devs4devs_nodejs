@@ -1,0 +1,23 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "Node.js Devs4Devs Demos",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.12.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stevewardiress/devs4devs_nodejs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stevewardiress/devs4devs_nodejs/issues"
+  },
+  "homepage": "https://github.com/stevewardiress/devs4devs_nodejs"
+}

@@ -1,16 +1,58 @@
-var http = require('http');
-var query = require('url');
+var express = require('express');
+var app = express();
 
-var server = http.createServer(handler);
-server.listen(1337, '127.0.0.1');
-
-function handler(req, res) {
-    var arguments = query.parse(req.url, true);
-    if(arguments.query.name) {
-        res.end('Hello ' + arguments.query.name + '\n');
-        return;
+function authenticateUser(req, res, next) {
+    if(req.query.token) {
+        //  validate the token here :-)
+        res.locals.isAuthenticated = true;
     }
-    res.end('Hello World\n');
+    next();
 }
 
-console.log('Server running at http://127.0.0.1:1337/');
+function requireAuthentication(req, res, next) {
+    if(!res.locals.isAuthenticated) {
+        res.status(401).write("access is denied!");
+        return res.end();
+    }
+    next();
+}
+
+app.all('/api', authenticateUser, requireAuthentication);
+
+//  this function runs for any request on any url
+app.all("/", function(req, res, next) {
+    res.write("middleware woz ere<br>");
+    next();
+});
+
+app.get('/api', function(req, res){
+    var dataObject = {
+        someField: "blah",
+        anotherField: "deBlah",
+        anArray: [
+            {key: "abc", value:"first"},
+            {key: "def", value:"second"}
+        ]
+    };
+    res.json(dataObject);
+});
+
+app.get('/', function (req, res) {
+    res.write('Got a GET request');
+    res.end();
+});
+
+app.post('/', function (req, res) {
+    res.write('Got a POST request');
+    res.end();
+});
+
+//  handle any other requests
+app.use(function(req, res) {
+    res.status(404).write('Sorry cant find that!');
+    res.end();
+});
+
+app.listen(1337, function () {
+    console.log('Server running at http://127.0.0.1:1337/');
+});

@@ -1,50 +1,12 @@
 var express = require('express');
 var app = express();
-
-function authenticateUser(req, res, next) {
-    if(req.query.token) {
-        //  validate the token here :-)
-        res.locals.isAuthenticated = true;
-    }
-    next();
-}
-
-function requireAuthentication(req, res, next) {
-    if(!res.locals.isAuthenticated) {
-        res.status(401).write("access is denied!");
-        return res.end();
-    }
-    next();
-}
-
-app.all('/api', authenticateUser, requireAuthentication);
+require("./routes/api/route")(app);
+require("./routes/www/route")(app);
 
 //  this function runs for any request on any url
 app.all("/", function(req, res, next) {
     res.write("middleware woz ere<br>");
     next();
-});
-
-app.get('/api', function(req, res){
-    var dataObject = {
-        someField: "blah",
-        anotherField: "deBlah",
-        anArray: [
-            {key: "abc", value:"first"},
-            {key: "def", value:"second"}
-        ]
-    };
-    res.json(dataObject);
-});
-
-app.get('/', function (req, res) {
-    res.write('Got a GET request');
-    res.end();
-});
-
-app.post('/', function (req, res) {
-    res.write('Got a POST request');
-    res.end();
 });
 
 //  handle any other requests

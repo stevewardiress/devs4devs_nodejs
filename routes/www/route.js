@@ -8,4 +8,4 @@ module.exports = function(app) {
         res.write('Got a POST request');
         res.end();
     });
-}
+};

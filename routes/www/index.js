@@ -1,11 +1,5 @@
-module.exports = function(app) {
-    app.get('/', function (req, res) {
-        res.write('Got a GET request');
-        res.end();
-    });
+var express = require('express');
+var router = express.Router();
 
-    app.post('/', function (req, res) {
-        res.write('Got a POST request');
-        res.end();
-    });
-};
+router.use(express.static('public'));
+module.exports = router;

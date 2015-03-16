@@ -1,4 +1,4 @@
-var middleWare = require("../../modules/ourMiddleware");
+var middleWare = require("../../modules");
 
 module.exports = function(app) {
     app.all('/api', middleWare.authenticateUser, middleWare.requireAuthentication);

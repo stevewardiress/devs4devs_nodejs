@@ -9,15 +9,5 @@ module.exports = function(app) {
         }
     );
 
-    var schema = mongoose.Schema(
-        {
-            name: {type: String, trim: true, required: true},
-            description: {type: String, trim: true, required: true},
-            votes: [vote]
-        }
-    );
-
-    //  converts the schema object into a model object which can be used
-    //  to create new instances of the Presentation
-    return mongoose.model('Presentation', schema, 'Presentation');
+    return mongoose.model('Vote', vote);
 };

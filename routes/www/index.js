@@ -7,4 +7,6 @@ router.use(express.static('public'));
 // authenticate the user if there's a token, but don't force them to login
 router.use(middleWare.authenticateUser);
 
-module.exports = router;
+module.exports = function(app) {
+    return router;
+}

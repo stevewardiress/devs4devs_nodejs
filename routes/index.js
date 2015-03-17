@@ -6,9 +6,13 @@ module.exports = function(app) {
         next();
     });
 
+    var bodyParser = require('body-parser')
+
+    app.use(bodyParser.json());
+
     //  load all of our routers and add them to the application
-    app.use("/api", require("./api"));
-    app.use("/", require("./www"));
+    app.use("/api", require("./api")(app));
+    app.use("/", require("./www")(app));
 
     //  handle any other requests
     app.use(function (req, res) {

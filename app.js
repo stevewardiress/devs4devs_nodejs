@@ -20,8 +20,8 @@ function requireAuthentication(req, res, next) {
 app.all('/api', authenticateUser, requireAuthentication);
 
 //  this function runs for any request on any url
-app.all("/", function(req, res, next) {
-    res.write("middleware woz ere<br>");
+app.all("*", function (req, res, next) {
+    console.log("middleware running for url %s", req.url);
     next();
 });
 

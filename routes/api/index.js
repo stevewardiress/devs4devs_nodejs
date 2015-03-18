@@ -7,15 +7,11 @@ router.use(middleWare.authenticateUser, middleWare.requireAuthentication);
 
 // define the home page route
 router.get('/', function(req, res) {
-    var dataObject = {
-        someField: "blah",
-        anotherField: "deBlah",
-        anArray: [
-            {key: "abc", value:"first"},
-            {key: "def", value:"second"}
-        ]
+    var presentationObject = {
+        name: "node.js",
+        description: "node.js presentation"
     };
-    res.json(dataObject);
+    res.json(presentationObject);
 });
 
 module.exports = router;

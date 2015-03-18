@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 
+//  middleware: reads the authorisation token
 function authenticateUser(req, res, next) {
     if(req.query.token) {
         //  validate the token here :-)
@@ -9,6 +10,7 @@ function authenticateUser(req, res, next) {
     next();
 }
 
+//  middleware: function that protects resources
 function requireAuthentication(req, res, next) {
     if(!res.locals.isAuthenticated) {
         res.status(401).write("access is denied!");
@@ -17,40 +19,15 @@ function requireAuthentication(req, res, next) {
     next();
 }
 
+//  api middleware: reads the token and checks if it has been read for all /api/* routes
 app.all('/api', authenticateUser, requireAuthentication);
 
-//  this function runs for any request on any url
-app.all("*", function (req, res, next) {
-    console.log("middleware running for url %s", req.url);
-    next();
-});
-
 app.get('/api', function(req, res){
-    var dataObject = {
-        someField: "blah",
-        anotherField: "deBlah",
-        anArray: [
-            {key: "abc", value:"first"},
-            {key: "def", value:"second"}
-        ]
+    var presentationObject = {
+        name: "node.js",
+        description: "node.js presentation"
     };
-    res.json(dataObject);
-});
-
-app.get('/', function (req, res) {
-    res.write('Got a GET request');
-    res.end();
-});
-
-app.post('/', function (req, res) {
-    res.write('Got a POST request');
-    res.end();
-});
-
-//  handle any other requests
-app.use(function(req, res) {
-    res.status(404).write('Sorry cant find that!');
-    res.end();
+    res.json(presentationObject);
 });
 
 app.listen(1337, function () {

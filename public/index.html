@@ -3,8 +3,29 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="bower_components/bootstrap-star-rating/css/star-rating.min.css"/>
 </head>
 <body>
-    <h1>Index page</h1>
+
+<div class="container-fluid col-lg-offset-4 col-lg-4">
+    <form>
+        <div class="form-group">
+            <label for="rating">Rating</label>
+            <input id="rating" type="number" class="rating" data-show-clear="false" data-stars="5" data-min="0" data-max="5" data-step=1 data-size="lg" data-rtl="false" value="1" />
+        </div>
+        <div class="form-group">
+            <label for="comments">Password</label>
+            <textarea class="form-control" id="comments" placeholder="Please give us feedback!" rows="5"></textarea>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>
+
+<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="bower_components/bootstrap-star-rating/js/star-rating.min.js"></script>
 </body>
+
 </html>

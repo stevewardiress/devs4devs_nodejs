@@ -38,7 +38,7 @@ router.delete('/Presentations/:name/Votes', function (req, res) {
 });
 
 router.post('/Presentations/:name/Vote', function (req, res) {
-   if (!req.body) return res.sendStatus(400)
+   if (!req.body) return res.sendStatus(400);
 
     Presentation.update(
         {name: req.params.name},
@@ -49,6 +49,10 @@ router.post('/Presentations/:name/Vote', function (req, res) {
         },
         {multi: false},
         function(err, numAffected) {
+            if (err || numAffected === 0) {
+                console.log(err);
+                return res.sendStatus(500);
+            }
             Presentation.find({name: req.params.name}, function (err, presentations) {
                 //console.log(req.body);
                 res.json(presentations);

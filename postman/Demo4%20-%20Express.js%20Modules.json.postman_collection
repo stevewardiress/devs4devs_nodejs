@@ -1,0 +1,60 @@
+{
+	"id": "683bfdea-3338-97eb-9711-b919884dd202",
+	"name": "Demo4 - Express.js Modules",
+	"description": "",
+	"order": [
+		"ca512a13-7dd3-ce3d-6ed3-896752bfeddf",
+		"3949cb31-c4d0-a946-1639-51103afd9d03"
+	],
+	"folders": [],
+	"timestamp": 1426684535583,
+	"synced": false,
+	"owner": 0,
+	"sharedWithTeam": false,
+	"subscribed": false,
+	"remoteLink": "",
+	"public": false,
+	"write": true,
+	"requests": [
+		{
+			"id": "3949cb31-c4d0-a946-1639-51103afd9d03",
+			"headers": "",
+			"url": "http://localhost:1337/api?token=123",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1426685591306,
+			"name": "Get /api/ (with token)",
+			"description": "",
+			"collectionId": "683bfdea-3338-97eb-9711-b919884dd202",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "ca512a13-7dd3-ce3d-6ed3-896752bfeddf",
+			"headers": "",
+			"url": "http://localhost:1337/api",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1426685559268,
+			"name": "Get /api/ (no token)",
+			"description": "",
+			"collectionId": "683bfdea-3338-97eb-9711-b919884dd202",
+			"responses": [],
+			"synced": false
+		}
+	]
+}

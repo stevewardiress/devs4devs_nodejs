@@ -38,7 +38,7 @@ router.delete('/Presentations/:name/Votes', function (req, res) {
 });
 
 router.post('/Presentations/:name/Vote', function (req, res) {
-   if (!req.body) return res.sendStatus(400);
+   if (!req.body || req.body.comments == "") return res.status(400).send({ error: 'missing comments'});;
 
     Presentation.update(
         {name: req.params.name},
@@ -51,10 +51,9 @@ router.post('/Presentations/:name/Vote', function (req, res) {
         function(err, numAffected) {
             if (err || numAffected === 0) {
                 console.log(err);
-                return res.sendStatus(500);
+                return res.status(500).send({ error: 'no presentations matched "' + req.params.name + '"'});
             }
             Presentation.find({name: req.params.name}, function (err, presentations) {
-                //console.log(req.body);
                 res.json(presentations);
             });
         }

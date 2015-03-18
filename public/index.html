@@ -60,12 +60,12 @@
             dataType: 'json',
             async: true,
             success: function(msg) {
-                debugger;
                 toastr.success('Thank you for your vote, ' + msg[0].votes.length + ' votes received so far!', 'Vote casted!')
             },
-            error: function(data, status, errorThrown) {
+            error: function(xhr, status, errorThrown) {
+                var err = JSON.parse(xhr.responseText);
                 // Display an error toast, with a title
-                toastr.error(errorThrown, 'Error :-( !')
+                toastr.error(err.error, 'Error :-( !')
             }
         });
 

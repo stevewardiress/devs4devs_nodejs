@@ -2,30 +2,77 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title>Devs4Devs - Feedback Form</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css"/>
     <link rel="stylesheet" href="bower_components/bootstrap-star-rating/css/star-rating.min.css"/>
+    <link rel="stylesheet" href="bower_components/toastr/toastr.min.css"/>
 </head>
 <body>
 
-<div class="container-fluid col-lg-offset-4 col-lg-4">
-    <form>
+<div class="container-fluid col-lg-offset-3 col-lg-6">
+    <h2>Devs4Devs Presentation Feedback Form</h2>
+
+    <form id="feedbackForm" role="form">
         <div class="form-group">
-            <label for="rating">Rating</label>
-            <input id="rating" type="number" class="rating" data-show-clear="false" data-stars="5" data-min="0" data-max="5" data-step=1 data-size="lg" data-rtl="false" value="1" />
+            <label for="presentation">Presentation</label>
+            <select id="presentation" class="form-control">
+                <option selected value="database">Database best practices</option>
+                <option value="three.js">three.js</option>
+                <option value="node.js">Node.js</option>
+            </select>
+        </div>
+        <div>
+            <div class="form-group">
+                <label for="rating">Rating</label>
+                <img src="images/feedback.jpg" style="width: 125px; height: 125px; float: right;">
+                <input id="rating" type="number" class="rating" data-show-clear="false" data-stars="5" data-min="0"
+                       data-max="5" data-step=1 data-size="lg" data-rtl="false" value="3"/>
+            </div>
         </div>
         <div class="form-group">
-            <label for="comments">Password</label>
+            <label for="comments">Comments</label>
             <textarea class="form-control" id="comments" placeholder="Please give us feedback!" rows="5"></textarea>
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
 
 <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="bower_components/bootstrap-star-rating/js/star-rating.min.js"></script>
+<script type="text/javascript" src="bower_components/toastr/toastr.min.js"></script>
+
+<script type="text/javascript">
+    $( "#feedbackForm" ).submit(function( event ) {
+
+        var presentation = $("#presentation").val();
+        var rating = parseInt($("#rating").val());
+        var comments = $("#comments").val();
+        var url = 'api/Presentations/' + presentation + '/Vote?token=233';
+        var vote = { comments: comments, rating: rating };
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: JSON.stringify(vote),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            async: true,
+            success: function(msg) {
+                debugger;
+                toastr.success('Thank you for your vote, ' + msg[0].votes.length + ' votes received so far!', 'Vote casted!')
+            },
+            error: function(data, status, errorThrown) {
+                // Display an error toast, with a title
+                toastr.error(errorThrown, 'Error :-( !')
+            }
+        });
+
+        event.preventDefault();
+    });
+</script>
+
 </body>
 
 </html>

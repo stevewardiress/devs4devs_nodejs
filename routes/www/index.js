@@ -1,11 +1,11 @@
 module.exports = function(app) {
     app.get('/', function (req, res) {
-        res.write('Got a GET request');
+        res.write('GET');
         res.end();
     });
 
     app.post('/', function (req, res) {
-        res.write('Got a POST request');
+        res.write('POST');
         res.end();
     });
 };

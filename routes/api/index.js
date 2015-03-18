@@ -1,16 +1,15 @@
 var middleWare = require("../../modules");
 
 module.exports = function(app) {
+
+    //  middleware: check if the token is there
     app.all('/api', middleWare.authenticateUser, middleWare.requireAuthentication);
+
     app.get('/api', function(req, res){
-        var dataObject = {
-            someField: "blah",
-            anotherField: "deBlah",
-            anArray: [
-                {key: "abc", value:"first"},
-                {key: "def", value:"second"}
-            ]
+        var presentationObject = {
+            name: "node.js",
+            description: "node.js presentation"
         };
-        res.json(dataObject);
+        res.json(presentationObject);
     });
 };

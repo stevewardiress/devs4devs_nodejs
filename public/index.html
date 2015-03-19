@@ -62,10 +62,15 @@
             success: function(msg) {
                 toastr.success('Thank you for your vote, ' + msg[0].votes.length + ' votes received so far!', 'Vote casted!')
             },
-            error: function(xhr, status, errorThrown) {
-                var err = JSON.parse(xhr.responseText);
-                // Display an error toast, with a title
-                toastr.error(err.error, 'Error :-( !')
+            error: function(xhr) {
+                if(xhr.responseText) {
+                    var err = JSON.parse(xhr.responseText);
+                    // Display an error toast, with a title
+                    toastr.error(err.error, 'Error :-( !')
+                } else {
+                    // Display an error toast, with a title
+                    toastr.error("Unable to connect to the server", 'Error :-( !')
+                }
             }
         });
 
